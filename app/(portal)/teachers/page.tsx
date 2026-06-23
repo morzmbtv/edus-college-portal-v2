@@ -1,3 +1,5 @@
-import { SectionPage } from "@/components/section-page";
-const rows = [["Гульмира Касенова","Информатика","18 лет","24 ч/нед","Активен"],["Аслан Беков","Электротехника","12 лет","20 ч/нед","Активен"],["Марина Соколова","Бухгалтерский учёт","9 лет","22 ч/нед","Активен"],["Ерлан Нургалиев","Физическая культура","15 лет","18 ч/нед","Активен"]];
-export default function Page(){return <SectionPage title="Преподаватели" description="Сотрудники, нагрузка и квалификация педагогов" columns={["Преподаватель","Дисциплина","Стаж","Нагрузка","Статус"]} rows={rows} action="Добавить сотрудника"/>}
+import { PersonnelDirectory } from "@/components/personnel-directory";
+
+export default function TeachersPage() {
+  return <PersonnelDirectory kind="teachers" />;
+}

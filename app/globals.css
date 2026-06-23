@@ -3,14 +3,390 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light; }
+:root {
+  color-scheme: light;
+  --edus-text: #172033;
+  --edus-muted: #526176;
+  --edus-subtle: #64748b;
+  --edus-border: #e2e8f0;
+}
 * { box-sizing: border-box; }
 html { background: #f5f7fb; }
-body { margin: 0; color: #172033; font-family: "Manrope Variable", Arial, sans-serif; }
-button, input { font: inherit; }
+body { margin: 0; color: var(--edus-text); font-family: "Manrope Variable", Arial, sans-serif; font-size: 16px; line-height: 1.55; }
+button, input, select, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 ::selection { background: #dbeafe; color: #1d4ed8; }
 
-@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* Readability layer: preserves the existing component logic and visual language. */
+main h1 {
+  font-size: clamp(1.75rem, 2.3vw, 2.25rem) !important;
+  line-height: 1.18 !important;
+  letter-spacing: -0.035em !important;
+  color: #111827;
+}
+
+main article h2,
+main section h2,
+main article h3,
+main section h3 {
+  font-size: clamp(1.125rem, 1.35vw, 1.375rem) !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.015em;
+  color: #172033;
+}
+
+main [class~="text-[8px]"],
+main [class~="text-[9px]"],
+main [class~="text-[10px]"],
+main [class~="text-[11px]"] {
+  font-size: 0.875rem !important;
+  line-height: 1.45rem !important;
+}
+
+main .text-xs {
+  font-size: 0.9375rem !important;
+  line-height: 1.5rem !important;
+}
+
+main .text-sm {
+  font-size: 1rem !important;
+  line-height: 1.65rem !important;
+}
+
+main article h2[class],
+main section h2[class],
+main article h3[class],
+main section h3[class] {
+  font-size: clamp(1.125rem, 1.35vw, 1.375rem) !important;
+  line-height: 1.35 !important;
+}
+
+main button,
+main a[class*="rounded"] {
+  min-height: 42px;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+main button span,
+main button p,
+main a[class*="rounded"] span,
+main a[class*="rounded"] p {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+main button svg,
+main a[class*="rounded"] svg {
+  flex-shrink: 0;
+}
+
+main button:not([class*="text-left"]),
+main a[class*="rounded"]:not([class*="text-left"]) {
+  align-items: center;
+}
+
+main button[class*="text-left"],
+main button[class*="w-full"],
+main a[class*="text-left"],
+main a[class*="block"],
+main a[class*="w-full"] {
+  white-space: normal;
+  flex-shrink: 1;
+}
+
+main button[class*="text-left"] span,
+main button[class*="w-full"] span,
+main a[class*="text-left"] span,
+main a[class*="block"] span,
+main a[class*="w-full"] span {
+  min-width: 0;
+}
+
+main input,
+main select,
+main textarea {
+  min-height: 48px;
+  font-size: 0.9375rem !important;
+  line-height: 1.5rem;
+  color: #1f2937;
+}
+
+main textarea { min-height: 112px; }
+
+main,
+main section,
+main article,
+main div,
+main li,
+main td,
+main th {
+  min-width: 0;
+}
+
+main p,
+main h1,
+main h2,
+main h3,
+main h4,
+main dd,
+main dt,
+main li {
+  overflow-wrap: anywhere;
+}
+
+main .truncate {
+  min-width: 0;
+}
+
+main table {
+  line-height: 1.5;
+  table-layout: auto;
+}
+
+main table th,
+main table td,
+main table th > *,
+main table td > * {
+  font-size: 0.875rem !important;
+  line-height: 1.4rem !important;
+}
+
+main table th {
+  padding: 1rem 1.125rem !important;
+  color: #526176 !important;
+  letter-spacing: 0.045em !important;
+  white-space: nowrap;
+}
+
+main table td {
+  padding: 1.125rem !important;
+  color: #334155;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+main table tbody tr { min-height: 64px; }
+
+main table td > div,
+main table td > span,
+main table td > a,
+main table td > button {
+  max-width: 100%;
+}
+
+main table td > button,
+main table td > a[class*="rounded"] {
+  width: max-content;
+  min-width: max-content;
+}
+
+main table td b,
+main table td small,
+main table td p {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main span[class*="rounded-full"],
+main span[class*="rounded-lg"],
+main span[class*="rounded-xl"] {
+  max-width: 100%;
+}
+
+main span[class*="rounded-full"] {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+main article[class*="shadow-card"] {
+  min-height: 132px;
+  padding: 1.5rem !important;
+  overflow-wrap: anywhere;
+}
+
+main [class~="mt-5"] { margin-top: 1.75rem !important; }
+main [class~="mt-6"] { margin-top: 2rem !important; }
+main [class~="mt-7"] { margin-top: 2.25rem !important; }
+main [class~="gap-3"] { gap: 1rem !important; }
+main [class~="gap-4"] { gap: 1.25rem !important; }
+main [class~="gap-5"] { gap: 1.5rem !important; }
+
+body .text-slate-400 { color: var(--edus-subtle) !important; }
+body .text-slate-500 { color: var(--edus-muted) !important; }
+
+aside nav a {
+  min-height: 52px;
+  font-size: 1rem !important;
+  line-height: 1.35rem;
+}
+
+header input,
+header select,
+header button {
+  font-size: 0.875rem !important;
+}
+
+main [class*="fixed"][class*="inset-0"] > form[class*="max-w-md"],
+main [class*="fixed"][class*="inset-0"] > div[class*="max-w-md"] { max-width: 35rem !important; }
+main [class*="fixed"][class*="inset-0"] > form[class*="max-w-xl"],
+main [class*="fixed"][class*="inset-0"] > div[class*="max-w-xl"] { max-width: 48rem !important; }
+main [class*="fixed"][class*="inset-0"] > form[class*="max-w-2xl"],
+main [class*="fixed"][class*="inset-0"] > div[class*="max-w-2xl"] { max-width: 56rem !important; }
+main [class*="fixed"][class*="inset-0"] > form[class*="max-w-3xl"],
+main [class*="fixed"][class*="inset-0"] > div[class*="max-w-3xl"] { max-width: 62rem !important; }
+main [class*="fixed"][class*="inset-0"] > form[class*="max-w-4xl"],
+main [class*="fixed"][class*="inset-0"] > div[class*="max-w-4xl"] { max-width: 70rem !important; }
+main [class*="fixed"][class*="inset-0"] > form[class*="max-w-5xl"],
+main [class*="fixed"][class*="inset-0"] > div[class*="max-w-5xl"] { max-width: 76rem !important; }
+main [class*="fixed"][class*="inset-0"] > form[class*="max-w-6xl"],
+main [class*="fixed"][class*="inset-0"] > div[class*="max-w-6xl"] { max-width: 82rem !important; }
+
+main [class*="fixed"][class*="inset-0"] h2 {
+  font-size: 1.5rem !important;
+  line-height: 1.3 !important;
+}
+
+main [class*="fixed"][class*="inset-0"] > form,
+main [class*="fixed"][class*="inset-0"] > div {
+  max-height: min(88vh, 820px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+main [class*="overflow-x-auto"] {
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+main [class*="overflow-x-auto"] > [class*="flex"][class*="min-w-max"],
+main [class*="overflow-x-auto"] > [class*="grid"][class*="min-w-"] {
+  width: max-content;
+}
+
+main [class*="grid"] > * {
+  min-width: 0;
+}
+
+main [class*="flex"] > * {
+  min-width: 0;
+}
+
+main [class*="grid-cols-4"] > article,
+main [class*="grid-cols-5"] > article,
+main [class*="grid-cols-6"] > article {
+  height: 100%;
+}
+
+main [class*="justify-between"] {
+  column-gap: 1rem;
+}
+
+main [class*="text-white"] h1,
+main [class*="text-white"] h2,
+main [class*="text-white"] h3 {
+  color: inherit !important;
+}
+
+header {
+  min-width: 0;
+}
+
+header > div,
+header label,
+header button,
+header span {
+  min-width: 0;
+}
+
+header input {
+  text-overflow: ellipsis;
+}
+
+aside nav a span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+aside nav a svg {
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  aside.fixed.inset-y-0.left-0 { width: 280px !important; }
+  .lg\:pl-\[248px\] { padding-left: 280px !important; }
+  header { min-height: 84px; }
+  main { padding-top: 2.25rem !important; padding-bottom: 3rem !important; }
+}
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  main .xl\:grid-cols-6 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  main .xl\:grid-cols-5 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  main .xl\:grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  main .sm\:grid-cols-3,
+  main .sm\:grid-cols-4,
+  main .md\:grid-cols-3,
+  main .md\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  main h1 { font-size: 1.75rem !important; }
+  main article h2,
+  main section h2,
+  main article h3,
+  main section h3 { font-size: 1.125rem !important; }
+  main article[class*="shadow-card"] { min-height: auto; padding: 1.25rem !important; }
+  main table th,
+  main table td { padding: 0.875rem !important; }
+  main [class*="fixed"][class*="inset-0"] { padding: 0.75rem !important; }
+
+  main button,
+  main a[class*="rounded"] {
+    max-width: 100%;
+  }
+
+  main div[class*="flex-wrap"] > button,
+  main div[class*="flex-wrap"] > a[class*="rounded"],
+  main section[class*="flex-wrap"] > button,
+  main section[class*="flex-wrap"] > a[class*="rounded"] {
+    width: 100%;
+    justify-content: center;
+  }
+
+  main [class*="fixed"][class*="inset-0"] > form,
+  main [class*="fixed"][class*="inset-0"] > div {
+    width: min(100%, calc(100vw - 1.5rem)) !important;
+    max-height: calc(100vh - 1.5rem);
+  }
+
+  header {
+    gap: 0.5rem;
+  }
+
+  header label {
+    max-width: 44vw;
+  }
+
+  header select {
+    max-width: 34vw;
+    text-overflow: ellipsis;
+  }
+}
+
+@keyframes rise { from { opacity: 0; } to { opacity: 1; } }
 .animate-rise { animation: rise .45s ease-out both; }
 @media (prefers-reduced-motion: reduce) { .animate-rise { animation: none; } }

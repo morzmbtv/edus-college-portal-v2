@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { BarChart3, Bell, BookOpenCheck, BrainCircuit, Building2, CalendarDays, CheckSquare2, ChevronDown, ClipboardCheck, FileText, GraduationCap, LayoutDashboard, LogOut, Menu, MessageSquareText, Search, Settings, ShieldCheck, UserPlus, Users, X } from "lucide-react";
+import { BarChart3, Bell, BookOpenCheck, BrainCircuit, BriefcaseBusiness, Building2, CalendarDays, CheckSquare2, ChevronDown, ClipboardCheck, FileText, GraduationCap, LayoutDashboard, LogOut, Menu, MessageSquareText, Search, Settings, ShieldCheck, UserPlus, Users, X } from "lucide-react";
 import { roleRoutes, roles, useRole, type Role } from "@/components/role-context";
 import { DashboardTasks } from "@/components/dashboard-tasks";
 import { DirectorComplianceWidget } from "@/components/director-compliance-widget";
@@ -17,6 +17,7 @@ const nav = [
   ["/compliance", "Проверки и соответствие", ShieldCheck],
   ["/students", "Студенты", GraduationCap],
   ["/teachers", "Преподаватели", Users],
+  ["/staff", "\u0421\u043e\u0442\u0440\u0443\u0434\u043d\u0438\u043a\u0438", BriefcaseBusiness],
   ["/schedule", "Расписание", CalendarDays],
   ["/performance", "Успеваемость", BarChart3],
   ["/attendance", "Посещаемость", ClipboardCheck],
@@ -34,7 +35,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
 
   const sidebar = <>
     <div className="flex h-[76px] items-center gap-3 border-b border-slate-100 px-6"><span className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-white shadow-lg shadow-blue-200"><BookOpenCheck size={23} /></span><div><p className="text-lg font-extrabold tracking-tight">EDUS</p><p className="text-[10px] font-semibold uppercase tracking-[.13em] text-slate-400">Портал колледжа</p></div></div>
-    <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-5">{nav.map(([href, label, Icon]) => { const active = pathname === href; const available = roleRoutes[role].includes(href); return <Link key={href} href={href} onClick={() => setMenuOpen(false)} title={available ? label : `Раздел не основной для роли «${role}»`} className={`flex h-11 items-center gap-3 rounded-xl px-3 text-[13px] font-semibold transition ${active ? "bg-blue-50 text-primary" : available ? "text-slate-500 hover:bg-slate-50 hover:text-slate-900" : "text-slate-300 opacity-55 hover:bg-slate-50 hover:opacity-90"}`}><Icon size={19} strokeWidth={active ? 2.2 : 1.8} /><span>{label}</span>{active ? <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" /> : null}</Link>; })}</nav>
+    <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-5">{nav.map(([href, label, Icon]) => { const active = pathname === href || pathname.startsWith(`${href}/`); const available = roleRoutes[role].includes(href); return <Link key={href} href={href} onClick={() => setMenuOpen(false)} title={available ? label : `Раздел не основной для роли «${role}»`} className={`flex h-11 items-center gap-3 rounded-xl px-3 text-[13px] font-semibold transition ${active ? "bg-blue-50 text-primary" : available ? "text-slate-500 hover:bg-slate-50 hover:text-slate-900" : "text-slate-300 opacity-55 hover:bg-slate-50 hover:opacity-90"}`}><Icon size={19} strokeWidth={active ? 2.2 : 1.8} /><span>{label}</span>{active ? <span className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" /> : null}</Link>; })}</nav>
     <div className="m-3 rounded-2xl bg-slate-50 p-4"><p className="text-xs font-bold text-slate-700">Демо-версия</p><p className="mt-1 text-[11px] leading-4 text-slate-400">Данные обновлены сегодня в 09:42</p></div>
     <Link href="/login" className="m-3 mt-0 flex h-11 items-center gap-3 rounded-xl px-3 text-[13px] font-semibold text-slate-500 hover:bg-red-50 hover:text-red-600"><LogOut size={18} />Выйти</Link>
   </>;
