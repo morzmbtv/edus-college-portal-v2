@@ -57,7 +57,7 @@ type TeacherTab =
   | "communications"
   | "audit"
   | "archive";
-type StaffTab = "overview" | "personal" | "documents" | "contract" | "instruction" | "attestations" | "medical" | "safety" | "tasks" | "audit" | "archive";
+type StaffTab = "overview" | "personal" | "documents" | "contract" | "instruction" | "attestations" | "medical" | "safety" | "attendance" | "tasks" | "audit" | "archive";
 
 const teacher = {
   id: "TCH-2026-001",
@@ -113,7 +113,7 @@ const teacherTabs: { key: TeacherTab; label: string; icon: React.ElementType }[]
   { key: "disciplines", label: "Дисциплины", icon: ClipboardCheck },
   { key: "documents", label: "Документы", icon: FileText },
   { key: "kpi", label: "KPI и показатели", icon: Star },
-  { key: "attendance", label: "Рабочее время", icon: CalendarDays },
+  { key: "attendance", label: "Табель и заявки", icon: CalendarDays },
   { key: "tasks", label: "Задачи", icon: CheckCircle2 },
   { key: "communications", label: "Коммуникации", icon: MessageCircle },
   { key: "audit", label: "История действий", icon: History },
@@ -129,6 +129,7 @@ const staffTabs: { key: StaffTab; label: string; icon: React.ElementType }[] = [
   { key: "attestations", label: "Аттестации", icon: Award },
   { key: "medical", label: "Медосмотры", icon: HeartPulse },
   { key: "safety", label: "Обучение по ТБ", icon: ShieldAlert },
+  { key: "attendance", label: "Табель и заявки", icon: CalendarDays },
   { key: "tasks", label: "Задачи", icon: CheckCircle2 },
   { key: "audit", label: "История действий", icon: History },
   { key: "archive", label: "Архив", icon: Archive },
@@ -672,6 +673,37 @@ export function PersonnelDossier({ kind }: { kind: PersonnelKind }) {
                 <article className="overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-card">
                   <SimpleTable columns={["Дата", "Вход", "Терминал входа", "Выход", "Терминал выхода", "Длительность", "Статус"]} rows={attendanceRows} />
                 </article>
+                <section className="grid gap-5 xl:grid-cols-[1fr_.9fr]">
+                  <article className="rounded-[2rem] border border-blue-100 bg-blue-50/40 p-6 shadow-card">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <h2 className="text-2xl font-black text-slate-950">Связь с табелем</h2>
+                        <p className="mt-2 text-base leading-7 text-slate-600">Рабочее время подтягивается из Face ID и заявок на отсутствие. В демо это mock-данные без бухгалтерских интеграций.</p>
+                      </div>
+                      <Link href="/timesheet" className="shrink-0 rounded-2xl bg-primary px-4 py-3 text-sm font-extrabold text-white">Открыть табель</Link>
+                    </div>
+                    <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                      {[["Код сегодня", "Я"], ["Отработано", "8 ч 04 мин"], ["Отклонение", "+4 мин"]].map(([label, value]) => (
+                        <div key={label} className="rounded-2xl bg-white p-4">
+                          <p className="text-sm font-bold text-slate-500">{label}</p>
+                          <p className="mt-2 text-xl font-black text-slate-950">{value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                  <article className="rounded-[2rem] border border-slate-100 bg-white p-6 shadow-card">
+                    <h2 className="text-2xl font-black text-slate-950">Заявки из мобильного приложения</h2>
+                    <div className="mt-5 space-y-3">
+                      {[["Отпроситься на часть дня", "24.06.2026 · 14:00–17:00", "На рассмотрении"], ["БС", "25.06.2026", "Новая"]].map(([type, period, status]) => (
+                        <div key={type} className="flex items-center gap-3 rounded-2xl bg-slate-50 p-4">
+                          <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-primary"><CalendarDays size={17} /></span>
+                          <span className="min-w-0 flex-1"><b className="block truncate text-base">{type}</b><small className="text-sm text-slate-500">{period}</small></span>
+                          <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-extrabold text-amber-700">{status}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </article>
+                </section>
               </div>
             ) : null}
 

@@ -9,25 +9,28 @@ type RoleContextValue = { role: Role; setRole: (role: Role) => void };
 const RoleContext = createContext<RoleContextValue | null>(null);
 
 export const roleRoutes: Record<Role, string[]> = {
-  "Директор": ["/dashboard", "/college", "/admissions", "/tasks", "/ai-risks", "/compliance", "/students", "/teachers", "/staff", "/schedule", "/performance", "/attendance", "/documents", "/communications", "/settings"],
-  "Завуч": ["/dashboard", "/college", "/admissions", "/tasks", "/ai-risks", "/compliance", "/students", "/teachers", "/staff", "/schedule", "/performance", "/attendance", "/documents"],
+  "Директор": ["/dashboard", "/college", "/tasks", "/ai-risks", "/compliance", "/students", "/teachers", "/staff", "/schedule", "/performance", "/attendance", "/timesheet", "/documents", "/communications", "/settings"],
+  "Завуч": ["/dashboard", "/college", "/tasks", "/ai-risks", "/compliance", "/students", "/teachers", "/staff", "/schedule", "/performance", "/attendance", "/timesheet", "/documents"],
   "Куратор": ["/dashboard", "/tasks", "/ai-risks", "/students", "/schedule", "/performance", "/attendance", "/documents", "/communications"],
-  "Преподаватель": ["/dashboard", "/tasks", "/students", "/schedule", "/performance", "/attendance"],
+  "Преподаватель": ["/dashboard", "/tasks", "/students", "/schedule", "/performance", "/attendance", "/timesheet"],
   "Психолог": ["/dashboard", "/tasks", "/ai-risks", "/students", "/documents"],
-  "Кадровик": ["/dashboard", "/college", "/tasks", "/compliance", "/teachers", "/staff", "/documents", "/settings"],
-  "Канцелярия": ["/dashboard", "/college", "/admissions", "/tasks", "/compliance", "/documents"],
+  "Кадровик": ["/dashboard", "/college", "/tasks", "/compliance", "/teachers", "/staff", "/attendance", "/timesheet", "/documents", "/settings"],
+  "Канцелярия": ["/dashboard", "/college", "/tasks", "/compliance", "/attendance", "/documents"],
 };
 
 export function RoleProvider({ children }: { children: React.ReactNode }) {
   const [role, setRoleState] = useState<Role>("Директор");
+
   useEffect(() => {
     const saved = window.localStorage.getItem("edus-demo-role") as Role | null;
     if (saved && roles.includes(saved)) setRoleState(saved);
   }, []);
+
   function setRole(next: Role) {
     setRoleState(next);
     window.localStorage.setItem("edus-demo-role", next);
   }
+
   return <RoleContext.Provider value={{ role, setRole }}>{children}</RoleContext.Provider>;
 }
 
